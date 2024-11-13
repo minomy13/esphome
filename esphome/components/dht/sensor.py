@@ -5,7 +5,6 @@ from esphome.components import sensor
 from esphome.const import (
     CONF_HUMIDITY,
     CONF_ID,
-    CONF_INTERNAL_PULLUP,
     CONF_MODEL,
     CONF_PIN,
     CONF_TEMPERATURE,
@@ -31,6 +30,7 @@ DHT_MODELS = {
     "DHT22_TYPE2": DHTModel.DHT_MODEL_DHT22_TYPE2,
 }
 DHT = dht_ns.class_("DHT", cg.PollingComponent)
+CONF_INTERNAL_PULLUP = "use_internal_pullup"
 
 CONFIG_SCHEMA = cv.Schema(
     {
