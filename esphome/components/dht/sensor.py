@@ -30,7 +30,7 @@ DHT_MODELS = {
     "DHT22_TYPE2": DHTModel.DHT_MODEL_DHT22_TYPE2,
 }
 DHT = dht_ns.class_("DHT", cg.PollingComponent)
-CONF_INTERNAL_PULLUP = "use_internal_pullup"
+CONF_USE_INTERNAL_PULLUP = "use_internal_pullup"
 
 CONFIG_SCHEMA = cv.Schema(
     {
@@ -51,7 +51,7 @@ CONFIG_SCHEMA = cv.Schema(
         cv.Optional(CONF_MODEL, default="auto detect"): cv.enum(
             DHT_MODELS, upper=True, space="_"
         ),
-        cv.Optional(CONF_INTERNAL_PULLUP, default=True): cv.boolean,
+        cv.Optional(CONF_USE_INTERNAL_PULLUP, default=True): cv.boolean,
     }
 ).extend(cv.polling_component_schema("60s"))
 
@@ -70,6 +70,6 @@ async def to_code(config):
         sens = await sensor.new_sensor(config[CONF_HUMIDITY])
         cg.add(var.set_humidity_sensor(sens))
 
-    cg.add(var.set_internal_pullup(config[CONF_INTERNAL_PULLUP]))
+    cg.add(var.set_internal_pullup(config[CONF_USE_INTERNAL_PULLUP]))
 
     cg.add(var.set_dht_model(config[CONF_MODEL]))
