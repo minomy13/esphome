@@ -24,7 +24,7 @@ void DHT::dump_config() {
     ESP_LOGCONFIG(TAG, "  Model: DHT22 (or equivalent)");
   }
 
-  if (this->use_internal_pullup_ == true) {
+  if (this->use_internal_pullup_) {
     ESP_LOGCONFIG(TAG, "  Internal pull-up resistor enabled.");
   } else {
     ESP_LOGCONFIG(TAG, "  Internal pull-up resistor disabled.");
@@ -108,7 +108,7 @@ bool HOT IRAM_ATTR DHT::read_sensor_(float *temperature, float *humidity, bool r
     delayMicroseconds(800);
   }
 
-  if (this->use_internal_pullup_ == true) {
+  if (this->use_internal_pullup_) {
     this->pin_->pin_mode(gpio::FLAG_INPUT | gpio::FLAG_PULLUP);
   } else {
     this->pin_->pin_mode(gpio::FLAG_INPUT);
