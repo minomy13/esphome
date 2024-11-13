@@ -5,6 +5,7 @@ from esphome.components import sensor
 from esphome.const import (
     CONF_HUMIDITY,
     CONF_ID,
+    CONF_INTERNAL_PULLUP,
     CONF_MODEL,
     CONF_PIN,
     CONF_TEMPERATURE,
@@ -50,6 +51,7 @@ CONFIG_SCHEMA = cv.Schema(
         cv.Optional(CONF_MODEL, default="auto detect"): cv.enum(
             DHT_MODELS, upper=True, space="_"
         ),
+        cv.Optional(CONF_INTERNAL_PULLUP, default=True): cv.boolean,
     }
 ).extend(cv.polling_component_schema("60s"))
 
@@ -67,5 +69,7 @@ async def to_code(config):
     if CONF_HUMIDITY in config:
         sens = await sensor.new_sensor(config[CONF_HUMIDITY])
         cg.add(var.set_humidity_sensor(sens))
+
+    cg.add(var.set_internal_pullup(config[CONF_INTERNAL_PULLUP]))
 
     cg.add(var.set_dht_model(config[CONF_MODEL]))
