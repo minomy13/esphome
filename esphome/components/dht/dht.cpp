@@ -25,9 +25,9 @@ void DHT::dump_config() {
   }
 
   if (this->use_internal_pullup_ == true) {
-    ESP_LOGCONFIG(TAG, "  Internal pull-up resistor enabled.")
+    ESP_LOGCONFIG(TAG, "  Internal pull-up resistor enabled.");
   } else {
-    ESP_LOGCONFIG(TAG, "  Internal pull-up resistor disabled.")
+    ESP_LOGCONFIG(TAG, "  Internal pull-up resistor disabled.");
   }
 
   LOG_UPDATE_INTERVAL(this);
